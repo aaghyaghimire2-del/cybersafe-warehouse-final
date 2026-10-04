@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/settings.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — CyberSafe Warehouse</title>
+<link rel="icon" type="image/png" href="img/favicon.png" />
+<link rel="stylesheet" href="css/auth.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand-lockup" href="dashboard.html" aria-label="CyberSafe Warehouse — dashboard">
+      <img class="brand-logo brand-logo-full" src="img/logo-full.png" alt="CyberSafe Warehouse" />
+      <img class="brand-logo brand-logo-icon" src="img/logo-icon.png" alt="" />
+    </a>
+    <div class="btn-row top-actions">
+      <button id="howtoplay-btn" title="How to play"><span class="ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span><span class="lbl">HOW TO PLAY</span></button>
+      <button id="settings-btn" title="Settings"><span class="ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg></span><span class="lbl">SETTINGS</span></button>
+      <button id="logout-btn" class="logout" title="Log out"><span class="ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg></span><span class="lbl">LOG OUT</span></button>
+    </div>
+  </div>
+  <div class="topbar-stripe"></div>
+</header>
+
+<main class="dash-wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="profile-card">
+      <div class="avatar-ring" id="avatar-ring" title="Progress to your next rank">
+        <div class="avatar-circle mono" id="avatar-circle">?</div>
+      </div>
+      <div class="profile-text">
+        <div class="profile-greeting mono" id="profile-greeting">WELCOME BACK</div>
+        <div class="profile-name" id="profile-name">Loading…</div>
+        <div class="rank-chip mono"><span class="rank-dot"></span><span id="profile-rank">—</span></div>
+      </div>
+    </div>
+
+    <div class="continue-card" id="continue-card">
+      <div class="continue-copy">
+        <div class="continue-label mono">CONTINUE</div>
+        <div class="continue-mission" id="continue-mission">Loading your progress…</div>
+        <div class="continue-sub" id="continue-sub"></div>
+      </div>
+      <a class="cta continue-btn" id="continue-btn" href="game.html">RESUME MISSION</a>
+    </div>
+  </section>
+
+  <!-- ============ WELCOME (new players only) ============ -->
+  <section class="welcome-card" id="welcome-card" hidden>
+    <div class="card-title">HOW A SHIFT WORKS</div>
+    <div class="card-sub">Three things to know before your first mission.</div>
+    <div class="steps">
+      <div class="step"><div class="step-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5 9 2 12 5 15"></polyline><polyline points="9 5 12 2 15 5"></polyline><polyline points="15 19 12 22 9 19"></polyline><polyline points="19 9 22 12 19 15"></polyline><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg></div><div><div class="step-n mono">STEP 1</div><div class="step-t">Walk the floor</div><div class="step-d">W A S D to move, mouse to look around the warehouse.</div></div></div>
+      <div class="step"><div class="step-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div><div><div class="step-n mono">STEP 2</div><div class="step-t">Inspect</div><div class="step-d">Aim at anything that looks off and click to take a closer look.</div></div></div>
+      <div class="step"><div class="step-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="3" x2="12" y2="21"></line><path d="M5 7l7-4 7 4"></path><path d="M3 14l2-7 2 7a3 3 0 0 1-4 0z"></path><path d="M17 14l2-7 2 7a3 3 0 0 1-4 0z"></path><line x1="8" y1="21" x2="16" y2="21"></line></svg></div><div><div class="step-n mono">STEP 3</div><div class="step-t">Judge it</div><div class="step-d">Flag it as a concern, or call it fine. You find out straight away.</div></div></div>
+    </div>
+  </section>
+
+  <!-- ============ KPI STATS ============ -->
+  <section class="kpis" id="stat-grid">
+    <div class="stat-card kpi-progress">
+      <div class="kpi-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+      <div class="kpi-body">
+        <div class="s-label">OVERALL PROGRESS</div>
+        <div class="s-value mono" id="stat-progress">0%</div>
+        <div class="mini-bar-track"><div class="mini-bar-fill" id="progress-bar-fill"></div></div>
+      </div>
+    </div>
+    <div class="stat-card kpi-score">
+      <div class="kpi-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg></div>
+      <div class="kpi-body">
+        <div class="s-label">TOTAL SCORE</div>
+        <div class="s-value mono" id="stat-total-score">0</div>
+      </div>
+    </div>
+    <div class="stat-card kpi-xp">
+      <div class="kpi-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+      <div class="kpi-body">
+        <div class="s-label">XP</div>
+        <div class="s-value mono" id="stat-xp">0</div>
+        <div class="mini-bar-track"><div class="mini-bar-fill xp" id="xp-bar-fill"></div></div>
+        <div class="mini-bar-caption mono" id="xp-caption">—</div>
+      </div>
+    </div>
+    <div class="stat-card kpi-rank">
+      <div class="kpi-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+      <div class="kpi-body">
+        <div class="s-label">CURRENT RANK</div>
+        <div class="s-value" id="stat-rank">Trainee</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RANK ROADMAP + NEXT GOALS ============ -->
+  <section class="roadmap-card" id="rank-roadmap">
+    <div class="roadmap-head">
+      <div class="card-title">RANK ROADMAP</div>
+      <div class="roadmap-note" id="roadmap-note"></div>
+    </div>
+    <div class="roadmap-scroll"><div class="roadmap-inner"><div class="roadmap-track" id="roadmap-track"></div></div></div>
+  </section>
+
+  <section class="goals-grid" id="goals">
+    <div class="goal-card">
+      <div class="card-title">CLOSEST ACHIEVEMENTS</div>
+      <div id="goals-list"></div>
+    </div>
+    <div class="goal-card">
+      <div class="card-title">EARN XP FASTER</div>
+      <div class="facts">
+        <div class="fact"><span class="fact-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></span><span>Every correct call is <b>5 XP</b> — real issue or decoy.</span></div>
+        <div class="fact"><span class="fact-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span><span>Clear all 13 real issues for a <b>+30 XP</b> bonus.</span></div>
+        <div class="fact"><span class="fact-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span><span>Multiplier: Level 1 <b>×1</b> · Level 2 <b>×1.5</b> · Level 3 <b>×2</b>.</span></div>
+      </div>
+      <div class="xp-example"><div>A clean Level 3 shift, all 19 objects checked</div><div class="xp-example-val mono">250 XP</div></div>
+    </div>
+  </section>
+
+  <!-- ============ MISSIONS ============ -->
+  <div class="section-head">
+    <div class="section-title">CHOOSE YOUR MISSION</div>
+    <div class="section-sub">Clear every real issue on a level to unlock the next one.</div>
+  </div>
+  <div class="level-grid" id="level-grid"></div>
+
+  <!-- ============ ACHIEVEMENTS ============ -->
+  <div class="section-head">
+    <div class="section-title">ACHIEVEMENTS <span class="section-count mono" id="achv-count">· 0 / 0 UNLOCKED</span></div>
+    <div class="filter-tabs" id="achv-filters" role="group" aria-label="Filter achievements">
+      <button type="button" class="filter-tab active" data-filter="all">ALL <span class="mono" id="f-all">0</span></button>
+      <button type="button" class="filter-tab" data-filter="unlocked">UNLOCKED <span class="mono" id="f-unlocked">0</span></button>
+      <button type="button" class="filter-tab" data-filter="locked">LOCKED <span class="mono" id="f-locked">0</span></button>
+    </div>
+  </div>
+  <div class="achv-grid" id="achv-grid"></div>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <div class="section-head">
+    <div class="section-title">LEADERBOARD</div>
+    <div class="you-chip" id="lb-you" hidden></div>
+  </div>
+  <div class="history-panel">
+    <table class="history leaderboard">
+      <thead>
+        <tr><th>#</th><th>PLAYER</th><th>RANK</th><th>XP</th><th>MISSIONS</th></tr>
+      </thead>
+      <tbody id="leaderboard-body">
+        <tr><td colspan="5" class="empty-state">Loading leaderboard…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============ RECENT SHIFTS ============ -->
+  <div class="section-head">
+    <div class="section-title">RECENT SHIFTS</div>
+    <div class="section-sub">Your last 20 shifts.</div>
+  </div>
+  <div class="history-panel">
+    <div id="history-body">
+      <div class="empty-state">Loading your history…</div>
+    </div>
+  </div>
+
+  <footer class="dash-footer">
+    <img src="img/logo-icon.png" alt="" class="footer-icon" />
+    <div class="footer-text">
+      <div class="footer-brand">CyberSafe Warehouse</div>
+      <div class="footer-tag">Practical safety training, built for the floor.</div>
+    </div>
+  </footer>
+
+</main>
+
+<!-- How to Play -->
+<div class="overlay hidden" id="howtoplay-overlay">
+  <div class="modal-panel">
+    <div class="stripe"></div>
+    <h1 class="brand">HOW TO <span>PLAY</span></h1>
+    <ul class="howto-list">
+      <li><b>MOVE</b> — W A S D to walk around the warehouse floor, full 360° mouse-look.</li>
+      <li><b>INSPECT</b> — aim the reticle at something and click to take a closer look.</li>
+      <li><b>JUDGE</b> — decide for yourself: flag it as a concern, or call it fine. You'll find out right away if you were right.</li>
+      <li><b>OFFICER</b> — click the IT officer near the entrance for general hints.</li>
+      <li><b>SITE MAP</b> — press M any time to see the floor plan. On Level 1 (Trainee) it also pins every real issue by area; on Levels 2 and 3 it shows the layout only.</li>
+      <li><b>GOAL</b> — correctly flag every real security issue before time runs out to clear the mission and unlock the next one.</li>
+      <li><b>SCORING</b> — right calls earn points and XP, whether it's a real issue or something that's actually fine. Wrong calls cost points.</li>
+    </ul>
+    <button class="primary" id="howtoplay-close">GOT IT</button>
+  </div>
+</div>
+
+<!-- Settings -->
+<div class="overlay hidden" id="settings-overlay">
+  <div class="modal-panel">
+    <div class="stripe"></div>
+    <h1 class="brand">SETTINGS</h1>
+
+    <div class="settings-section">
+      <div class="settings-heading">AUDIO</div>
+
+      <div class="slider-row">
+        <label>Master Volume</label>
+        <input type="range" min="0" max="100" id="set-master-volume" />
+        <span class="slider-val mono" id="set-master-volume-val">80%</span>
+      </div>
+      <div class="slider-row">
+        <label>Music Volume</label>
+        <input type="range" min="0" max="100" id="set-music-volume" />
+        <span class="slider-val mono" id="set-music-volume-val">45%</span>
+      </div>
+      <div class="slider-row">
+        <label>SFX Volume</label>
+        <input type="range" min="0" max="100" id="set-sfx-volume" />
+        <span class="slider-val mono" id="set-sfx-volume-val">80%</span>
+      </div>
+
+      <div class="btn-inline-row">
+        <button class="mini-btn" id="vol-decrease-btn">− VOLUME</button>
+        <button class="mini-btn" id="vol-increase-btn">+ VOLUME</button>
+        <button class="mini-btn" id="test-sound-btn">TEST SOUND</button>
+      </div>
+
+      <div class="toggle-row">
+        <label>Silent / Mute</label>
+        <label class="switch">
+          <input type="checkbox" id="set-mute" />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-heading">DISPLAY</div>
+
+      <div class="slider-row">
+        <label>Brightness</label>
+        <input type="range" min="50" max="150" id="set-brightness" />
+        <span class="slider-val mono" id="set-brightness-val">100%</span>
+      </div>
+
+      <div class="toggle-row">
+        <label>Dark Mode</label>
+        <label class="switch">
+          <input type="checkbox" id="set-dark-mode" checked />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <label>Fullscreen</label>
+        <label class="switch">
+          <input type="checkbox" id="set-fullscreen" />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+
+      <div class="select-row">
+        <label>Graphics Quality</label>
+        <select id="set-graphics-quality">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+
+      <div class="toggle-row">
+        <label>Interaction Indicator</label>
+        <label class="switch">
+          <input type="checkbox" id="set-interaction-indicator" checked />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <label>Reduce Motion</label>
+        <label class="switch">
+          <input type="checkbox" id="set-reduce-motion" />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-heading">GAMEPLAY</div>
+
+      <div class="toggle-row">
+        <label>Tutorial</label>
+        <label class="switch">
+          <input type="checkbox" id="set-tutorial" checked />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <label>Hints (compass &amp; map)</label>
+        <label class="switch">
+          <input type="checkbox" id="set-hints" checked />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <label>Timer <span class="settings-note-inline">(off = untimed practice mode)</span></label>
+        <label class="switch">
+          <input type="checkbox" id="set-timer" checked />
+          <span class="switch-track"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-heading">CHANGE PASSWORD</div>
+      <div class="msg" id="pw-msg"></div>
+      <form id="password-form">
+        <div class="field">
+          <label for="current-password">CURRENT PASSWORD</label>
+          <input type="password" id="current-password" autocomplete="current-password" required />
+        </div>
+        <div class="field">
+          <label for="new-password">NEW PASSWORD</label>
+          <input type="password" id="new-password" autocomplete="new-password" minlength="6" required />
+        </div>
+        <button class="primary" type="submit">UPDATE PASSWORD</button>
+      </form>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-heading">RESET PROGRESS</div>
+      <div class="settings-note">Clears your XP, rank, unlocked levels, achievements, and shift history. This can't be undone.</div>
+      <button class="danger-btn" id="reset-progress-btn">RESET ALL PROGRESS</button>
+    </div>
+
+    <button class="secondary-btn" id="settings-close">CLOSE</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="achv-overlay">
+  <div class="modal-panel achv-modal">
+    <div class="achv-modal-icon" id="achv-modal-icon"></div>
+    <div class="achv-modal-category" id="achv-modal-category">CATEGORY</div>
+    <div class="achv-modal-name" id="achv-modal-name">Achievement Name</div>
+    <div class="achv-modal-status-pill" id="achv-modal-pill">Locked</div>
+    <div class="achv-modal-section">
+      <div class="achv-modal-label">DESCRIPTION</div>
+      <div class="achv-modal-text" id="achv-modal-desc">—</div>
+    </div>
+    <div class="achv-modal-section">
+      <div class="achv-modal-label">UNLOCK REQUIREMENT</div>
+      <div class="achv-modal-text" id="achv-modal-requirement">—</div>
+    </div>
+    <div class="achv-modal-section" id="achv-modal-meter-wrap" style="display:none;">
+      <div class="achv-modal-label">PROGRESS</div>
+      <div class="mini-bar-track"><div class="mini-bar-fill xp" id="achv-modal-meter-fill"></div></div>
+      <div class="mini-bar-caption mono" id="achv-modal-meter-caption">—</div>
+    </div>
+    <div class="achv-modal-section">
+      <div class="achv-modal-label">COMPLETION STATUS</div>
+      <div class="achv-modal-text" id="achv-modal-completion">—</div>
+    </div>
+    <button class="secondary-btn" id="achv-close">CLOSE</button>
+  </div>
+</div>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>

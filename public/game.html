@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/settings.js"></script>
+<script>
+  // The in-game HUD overlays a fixed dark 3D scene and was designed entirely
+  // around that — Light Mode is meant for the flat Dashboard/Login pages,
+  // not this one. Brightness still applies (it's a screen filter, not a
+  // theme), only the dark/light color theme is pinned here.
+  document.documentElement.setAttribute('data-theme', 'dark');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Warehouse Cyber Watch</title>
+<link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+<div id="loading">
+  <div class="ltxt mono">BUILDING WAREHOUSE…</div>
+  <div class="bar-track"><div class="bar-fill" id="loadbar"></div></div>
+</div>
+
+<div id="canvas-wrap"></div>
+
+<div id="topbar">
+  <span id="user-tag" class="mono"></span>
+  <a href="dashboard.html">DASHBOARD</a>
+</div>
+
+<div id="hud" style="display:none;">
+  <div class="hud-panel">
+    <div class="hud-label">MISTAKES FOUND</div>
+    <div class="hud-value mono" id="found-count">0 / 13</div>
+  </div>
+  <div class="hud-panel" style="border-left-color:var(--ok);">
+    <div class="hud-label">SCORE</div>
+    <div class="hud-value mono" id="score">0</div>
+  </div>
+  <div class="hud-panel" style="border-left-color:var(--alert);">
+    <div class="hud-label">SHIFT TIME LEFT</div>
+    <div class="hud-value mono" id="timer">04:00</div>
+  </div>
+</div>
+
+<div id="hint-bar" style="display:none;">WASD — Move &nbsp;·&nbsp; Mouse — Look &nbsp;·&nbsp; Click — Inspect &nbsp;·&nbsp; M — Map &nbsp;·&nbsp; Esc — Pause</div>
+<div id="crosshair" style="display:none;"></div>
+<div id="popup"></div>
+<div id="compass" class="mono">
+  <div class="obj-row">
+    <span class="obj-icon">🎯</span>
+    <div>
+      <div class="obj-label">OBJECTIVE</div>
+      <div class="obj-text" id="objective-text">Inspect the warehouse for security concerns</div>
+    </div>
+  </div>
+  <div class="obj-row loc-row">
+    <span class="obj-icon" id="lead-arrow">▲</span>
+    <div>
+      <div class="obj-label">LOCATION</div>
+      <div class="obj-text" id="lead-text">—</div>
+    </div>
+  </div>
+</div>
+<div id="minimap-wrap">
+  <div class="mm-label mono">FLOOR PLAN</div>
+  <canvas id="minimap" width="150" height="200"></canvas>
+  <button id="map-open-btn" class="mono">SITE MAP (M)</button>
+</div>
+
+<div class="overlay hidden" id="map-overlay">
+  <div class="panel map-panel">
+    <div class="stripe"></div>
+    <h1>SITE <span>MAP</span></h1>
+    <div class="subtitle">Every planted mistake, pinned to its area. Green = correctly flagged, red = missed.</div>
+    <div class="map-body">
+      <canvas id="sitemap-canvas" width="340" height="470"></canvas>
+      <div id="map-legend"></div>
+    </div>
+    <button class="primary" id="map-close-btn">CLOSE MAP (M)</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="judgment-overlay">
+  <div class="panel judgment-panel">
+    <div class="stripe"></div>
+    <div class="judgment-prompt" id="judgment-prompt">You notice something worth a closer look.</div>
+    <div class="judgment-image-wrap" id="judgment-image-wrap" style="display:none;">
+      <img id="judgment-image" alt="Close-up view" />
+    </div>
+    <div class="judgment-question">Is this a security concern?</div>
+    <div class="judgment-buttons" id="judgment-buttons">
+      <button class="judge-btn flag" id="judge-flag-btn">🚩 Flag as a Concern</button>
+      <button class="judge-btn clear" id="judge-clear-btn">✅ Looks Fine</button>
+    </div>
+    <div class="judgment-feedback" id="judgment-feedback" style="display:none;">
+      <div class="jf-verdict" id="jf-verdict"></div>
+      <div class="jf-explain" id="jf-explain"></div>
+      <button class="primary" id="judgment-continue-btn">CONTINUE</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="start-overlay">
+  <div class="panel">
+    <div class="stripe"></div>
+    <h1>WAREHOUSE <span>CYBER WATCH</span></h1>
+    <div class="subtitle">A walk-through inspection shift. Every object you inspect is your own call — flag it or clear it.</div>
+    <ul class="rules">
+      <li><b>MOVE</b> W A S D to walk around the floor, full 360° mouse-look.</li>
+      <li><b>INSPECT</b> Aim the reticle at something and click to take a closer look.</li>
+      <li><b>JUDGE</b> Decide for yourself: flag it as a concern, or call it fine. You'll find out right away if you were right.</li>
+      <li><b>OFFICER</b> Click the IT officer near the entrance for hints.</li>
+      <li><b>GOAL</b> Correctly flag every real security issue before time runs out. Wrong calls cost points — but so does missing a real one.</li>
+    </ul>
+    <div class="mission-locked-label mono" id="mission-locked-label" style="display:none;"></div>
+    <div class="diff-row" id="diff-row">
+      <div class="diff-btn" data-diff="easy">
+        <div class="d-name">LEVEL 1</div>
+        <div class="d-desc">Obvious clues · 6 min</div>
+      </div>
+      <div class="diff-btn active" data-diff="normal">
+        <div class="d-name">LEVEL 2</div>
+        <div class="d-desc">More realistic · 4 min</div>
+      </div>
+      <div class="diff-btn" data-diff="hard">
+        <div class="d-name">LEVEL 3</div>
+        <div class="d-desc">Subtle & tricky · 2:30</div>
+      </div>
+    </div>
+    <button class="primary" id="start-btn">CLOCK IN &amp; START SHIFT</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="pause-overlay">
+  <div class="panel">
+    <div class="stripe"></div>
+    <h1>SHIFT <span>PAUSED</span></h1>
+    <div class="subtitle">Click below to head back onto the floor.</div>
+    <button class="primary" id="resume-btn">RESUME SHIFT</button>
+    <button class="secondary" id="exit-dashboard-btn">EXIT TO DASHBOARD</button>
+  </div>
+</div>
+
+<div class="overlay hidden" id="end-overlay">
+  <div class="panel" id="end-panel">
+    <div class="stripe"></div>
+    <h1 id="end-title">SHIFT <span>COMPLETE</span></h1>
+    <div class="subtitle" id="end-sub">Here's your end-of-shift report.</div>
+    <div class="score-row">
+      <div>FINAL SCORE</div>
+      <div class="big mono" id="final-score">0</div>
+    </div>
+    <div id="progress-feedback" style="display:none;"></div>
+    <div id="recap"></div>
+    <a class="primary continue-level-link" id="continue-level-btn" href="#" style="display:none;">CONTINUE TO LEVEL 2</a>
+    <button class="secondary" id="restart-btn">RUN ANOTHER SHIFT</button>
+    <button class="secondary" id="dashboard-btn">BACK TO DASHBOARD</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

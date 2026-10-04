@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/settings.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Warehouse Cyber Watch</title>
+<link rel="stylesheet" href="css/auth.css" />
+<style>
+  body.loading-page{
+    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:radial-gradient(ellipse at top, #1b1e22, #0b0c0d 70%);
+    gap:26px; padding:24px;
+  }
+  .load-stripe{
+    width:280px; height:8px;
+    background:repeating-linear-gradient(135deg, var(--hazard) 0 16px, var(--steel-900) 16px 32px);
+  }
+  .load-brand{
+    font-size:34px; letter-spacing:.5px; text-align:center; color:var(--ink);
+    font-family:'Arial Narrow','Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  .load-brand span{ color:var(--hazard); }
+  .load-tag{
+    font-size:12px; letter-spacing:3px; color:var(--ink-dim); text-transform:uppercase;
+  }
+  .load-bar-track{
+    width:280px; height:6px; background:var(--steel-700); overflow:hidden;
+  }
+  .load-bar-fill{
+    height:100%; width:0%; background:var(--hazard);
+    transition:width .25s ease;
+  }
+  .load-status{
+    font-size:11px; letter-spacing:2px; color:var(--ink-dim);
+    animation:load-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes load-pulse{
+    0%, 100%{ opacity:0.4; }
+    50%{ opacity:1; }
+  }
+  .load-skip{
+    font-size:11px; color:var(--steel-600); letter-spacing:1px;
+  }
+</style>
+</head>
+<body class="loading-page">
+
+  <div class="load-stripe"></div>
+  <div class="load-brand">WAREHOUSE <span>CYBER WATCH</span></div>
+  <div class="load-tag mono">SECURITY AWARENESS TRAINING</div>
+
+  <div class="load-bar-track"><div class="load-bar-fill" id="load-bar"></div></div>
+  <div class="load-status mono" id="load-status">INITIALIZING…</div>
+
+<script>
+(function(){
+  const bar = document.getElementById('load-bar');
+  const status = document.getElementById('load-status');
+  const steps = [
+    [15, 'INITIALIZING…'],
+    [40, 'LOADING SECURITY MODULES…'],
+    [65, 'CALIBRATING SENSORS…'],
+    [88, 'PREPARING SITE ACCESS…'],
+    [100, 'READY']
+  ];
+  let i = 0;
+  function tick(){
+    if(i < steps.length){
+      bar.style.width = steps[i][0] + '%';
+      status.textContent = steps[i][1];
+      i++;
+      setTimeout(tick, 380);
+    } else {
+      setTimeout(()=>{ window.location.href = '/index.html'; }, 250);
+    }
+  }
+  tick();
+})();
+</script>
+</body>
+</html>

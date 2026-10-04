@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/settings.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Warehouse Cyber Watch — Sign In</title>
+<link rel="stylesheet" href="css/auth.css" />
+</head>
+<body class="center-page">
+
+<div id="boot-loading">
+  <div class="stripe"></div>
+  <div class="boot-title">WAREHOUSE <span>CYBER WATCH</span></div>
+  <div class="boot-text mono">LOADING…</div>
+</div>
+
+<div class="card" id="auth-card" style="display:none;">
+  <div class="stripe"></div>
+  <h1 class="brand">WAREHOUSE <span>CYBER WATCH</span></h1>
+  <div class="tagline">Sign in to track your shifts, or create an account to get started.</div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="login">LOG IN</div>
+    <div class="tab" data-tab="register">REGISTER</div>
+  </div>
+
+  <div class="msg" id="msg"></div>
+
+  <form class="form-panel active" id="login-form" data-panel="login">
+    <div class="field">
+      <label for="login-username">USERNAME</label>
+      <input type="text" id="login-username" autocomplete="username" required />
+    </div>
+    <div class="field">
+      <label for="login-password">PASSWORD</label>
+      <input type="password" id="login-password" autocomplete="current-password" required />
+    </div>
+    <button class="primary" type="submit" id="login-btn">LOG IN</button>
+  </form>
+
+  <form class="form-panel" id="register-form" data-panel="register">
+    <div class="field">
+      <label for="reg-username">USERNAME</label>
+      <input type="text" id="reg-username" autocomplete="username" minlength="3" maxlength="24" required />
+    </div>
+    <div class="field">
+      <label for="reg-password">PASSWORD</label>
+      <input type="password" id="reg-password" autocomplete="new-password" minlength="6" required />
+    </div>
+    <div class="field">
+      <label for="reg-password2">CONFIRM PASSWORD</label>
+      <input type="password" id="reg-password2" autocomplete="new-password" minlength="6" required />
+    </div>
+    <button class="primary" type="submit" id="register-btn">CREATE ACCOUNT</button>
+  </form>
+
+  <div class="hint-line">Runs on a local file-based account store — for personal or classroom use.</div>
+</div>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
