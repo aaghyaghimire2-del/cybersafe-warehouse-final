@@ -149,3 +149,5 @@ DB_HOST=localhost DB_PORT=3306 DB_USER=root DB_PASSWORD=yourpass DB_NAME=cyberwa
 - Want a hosted MySQL instance instead of XAMPP later (e.g. for a real
   deployment)? Just point the `DB_*` environment variables at it — nothing
   else in the app needs to change, since all the SQL lives in `db.js`.
+
+  B1 Railway deployment
